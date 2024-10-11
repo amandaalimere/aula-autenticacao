@@ -6,8 +6,14 @@ class PessoaRequests {
     }
 
     async listarPessoas() {
+        const token = localStorage.getItem('token');
         try {
-            const response = await fetch(`${this.serverUrl}${this.routeListarPessoas}`);
+            const response = await fetch(`${this.serverUrl}${this.routeListarPessoas}`,
+            {
+                headers: {
+                    'x-access-token': `${token}`
+                }
+            });
 
             if(!response.ok) {
                 throw new Error('Não foi possível listar as pessoas.');
